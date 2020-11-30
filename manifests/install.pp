@@ -4,18 +4,12 @@ class radarr::install {
   $curl            = '/opt/puppetlabs/puppet/bin/curl'
   $api_url         = 'https://api.github.com/repos/Radarr/Radarr/tags'
   $jq_cmd          = 'jq --raw-output \'.[0].name\''
-  $new_version = inline_template("<%= `${curl} -s ${api_url} | ${jq_cmd}'` %>")
-  notify{"new version is ${new_version}":}
-  unless $new_verison =~ String[1] {
-    fail ("radarr version is '${new_version}'")
+  $package_version     = chomp(inline_template("<%= `${curl} -s ${api_url} | ${jq_cmd}` %>"))
+  unless $package_version =~ String[1] {
+    fail ("radarr version is '${package_version}'")
   }
 
-  unless $facts[radarr_version] =~ String[1] {
-    fail ("radarr version is '${facts[radarr_version]}'")
-  }
   $package_name    = 'Radarr.master'
-  $package_version = $facts[radarr_version]
-  notify{ "package_version is ${package_version}":}
   $install_path    = $::radarr::install_path
   $extract_dir     = "${install_path}/Radarr-${package_version}"
   $creates         = "${extract_dir}/Radarr"
