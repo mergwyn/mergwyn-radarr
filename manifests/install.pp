@@ -10,7 +10,7 @@ class radarr::install {
   $creates         = "${extract_dir}/Radarr"
   $link            = "${install_path}/Radarr"
   $repository_url  = 'https://github.com/Radarr/Radarr/releases/download/'
-  $package_source  = "${repository_url}/v${package_version}/${package_name}.${package_version}.linux.tar.gz"
+  $package_source  = "${repository_url}/${package_version}/${package_name}.master.${package_version[1,-1]}.linux-core-x64.tar.gz"
   $archive_name    = "${package_name}-${package_version}.linux.tar.gz"
   $archive_path    = "${install_path}/${archive_name}"
 
@@ -49,4 +49,3 @@ class radarr::install {
     }
   }
 }
-# vim: number tabstop=8 expandtab shiftwidth=2 softtabstop=2
