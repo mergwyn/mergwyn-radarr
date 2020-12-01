@@ -12,8 +12,7 @@ User=<%= scope['::radarr::user'] %>
 Group=<%= scope['::radarr::group'] %>
 Type=simple
 Restart=on-failure
-#TODO parameterise path
-ExecStart=/usr/bin/mono <%= scope['::radarr::install_path'] %>/Radarr/Radarr.exe --nobrowser
+ExecStart=<%= scope['::radarr::install_path'] %>/Radarr/Radarr --nobrowser
 TimeoutStopSec=20
 
 [Install]
