@@ -3,3 +3,4 @@ fixtures:
     stdlib: puppetlabs/stdlib
     systemd: camptocamp/systemd
     archive: puppet/archive
+    githubreleases: dodevops-githubreleases
