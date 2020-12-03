@@ -9,7 +9,7 @@ class radarr::install {
     }
 
     $archive_name = "/Radarr.latest.${edition}.tar.gz"
-    $archive_path = "${::puppet_vardir}/${archive_name}"
+    $archive_path = "${facts['puppet_vardir']}/${archive_name}"
     $install_path = $::radarr::install_path
     $creates      = "${install_path}/Radarr"
 
@@ -20,16 +20,14 @@ class radarr::install {
       asset_filepattern => $edition,
     }
     -> archive { $archive_name:
-      source       => $archive_path,
+      source       => "file://${archive_path}",
       extract      => true,
       extract_path => $install_path,
-      creates      => $creates,
       cleanup      => false,
       user         => $::radarr::user,
       group        => $::radarr::group,
       notify       => Service['radarr.service'],
       require      => Githubreleases_download[$archive_path],
-      refreshonly  => true,
     }
   }
 }
