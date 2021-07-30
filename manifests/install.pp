@@ -13,6 +13,13 @@ class radarr::install {
     $install_path = $::radarr::install_path
     $creates      = "${install_path}/Radarr"
 
+    file { $install_path :
+      ensure => directory,
+      owner  => $::radarr::user,
+      group  => $::radarr::group,
+    }
+
+
     githubreleases_download { $archive_path:
       author            => 'Radarr',
       repository        => 'Radarr',
@@ -23,6 +30,7 @@ class radarr::install {
       source       => "file://${archive_path}",
       extract      => true,
       extract_path => $install_path,
+      creates      => $creates,
       cleanup      => false,
       user         => $::radarr::user,
       group        => $::radarr::group,
