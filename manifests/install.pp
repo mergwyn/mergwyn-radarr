@@ -22,7 +22,6 @@ class radarr::install {
 # https://github.com/Radarr/Radarr/releases/download/v3.2.2.5080/Radarr.master.3.2.2.5080.linux-core-arm64.tar.gz
 
 
-      $short_version   = $::radarr_version[1,-1]
       $package_version = $::radarr_version
       $install_path    = $::radarr::install_path
       $package_name    = 'Radarr.master'
@@ -30,8 +29,8 @@ class radarr::install {
       $creates         = "${extract_dir}/Radarr"
       $link            = "${install_path}/Radarr"
       $repository_url  = 'https://github.com/Radarr/Radarr/releases/download'
-      $archive_name    = "${package_name}.${short_version}.${edition}.tar.gz"
-      $package_source  = "${repository_url}/${package_version}/${archive_name}"
+      $archive_name    = "${package_name}.${package_version}.${edition}.tar.gz"
+      $package_source  = "${repository_url}/v${package_version}/${archive_name}"
       $archive_path    = "${install_path}/${archive_name}"
 
       if $radarr::package_manage {
