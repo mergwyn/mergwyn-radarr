@@ -24,7 +24,8 @@ class radarr::install {
 
       $package_version = $::radarr_version
       $install_path    = $::radarr::install_path
-      $package_name    = 'Radarr.master'
+      $branch          = 'master'
+      $package_name    = "Radarr.${branch}"
       $extract_dir     = "${install_path}/Radarr-${package_version}"
       $creates         = "${extract_dir}/Radarr"
       $link            = "${install_path}/Radarr"
